@@ -1,0 +1,13 @@
+<resources>
+    <style name="VashTheme" parent="@android:style/Theme.Black">
+        <item name="android:textColor">#F0E68C</item>
+        <item name="android:buttonStyle">@style/VashThemeButton</item>
+        <item name="android:textViewStyle">@style/VashThemeTextView</item>
+    </style>
+    <style name="VashThemeButton" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/button</item>
+    </style>
+    <style name="VashThemeTextView" parent="@android:style/Widget.TextView">
+        <item name="android:background">@drawable/textview</item>
+    </style>
+</resources>
