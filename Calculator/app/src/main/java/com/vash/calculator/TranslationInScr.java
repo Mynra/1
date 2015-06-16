@@ -76,7 +76,13 @@ public class TranslationInScr {
             if (k>5 && ((rezNotation.charAt(k)=='t' && rezNotation.charAt(k-2)=='r' &&
                     rezNotation.charAt(k-4)=='q' && rezNotation.charAt(k-6)=='s')||
                     (rezNotation.charAt(k)=='t' && rezNotation.charAt(k-2)=='c' &&
-                            rezNotation.charAt(k-4)=='a' && rezNotation.charAt(k-6)=='f'))){
+                            rezNotation.charAt(k-4)=='a' && rezNotation.charAt(k-6)=='f')||
+                    (rezNotation.charAt(k)=='n' && rezNotation.charAt(k-2)=='i' &&
+                            rezNotation.charAt(k-4)=='s' && rezNotation.charAt(k-6)=='a')||
+                    (rezNotation.charAt(k)=='s' && rezNotation.charAt(k-2)=='o' &&
+                            rezNotation.charAt(k-4)=='c' && rezNotation.charAt(k-6)=='a')||
+                    (rezNotation.charAt(k)=='g' && rezNotation.charAt(k-2)=='t' &&
+                            rezNotation.charAt(k-4)=='c' && rezNotation.charAt(k-6)=='a'))){
                 rezNotation = rezNotation.substring(0,k-5) + rezNotation.substring(k-4,k-3) +
                         rezNotation.substring(k-2,k-1) +
                         rezNotation.substring(k, rezNotation.length());
@@ -85,7 +91,9 @@ public class TranslationInScr {
                     rezNotation.charAt(k-2)=='o' && rezNotation.charAt(k-4)=='c') ||
                     (rezNotation.charAt(k)=='g' && rezNotation.charAt(k-2)=='t' &&
                     rezNotation.charAt(k-4)=='c') || (rezNotation.charAt(k)=='g' &&
-                    rezNotation.charAt(k-2)=='o' && rezNotation.charAt(k-4)=='l'))){
+                    rezNotation.charAt(k-2)=='o' && rezNotation.charAt(k-4)=='l') ||
+                    (rezNotation.charAt(k)=='g' && rezNotation.charAt(k-2)=='t'
+                            && rezNotation.charAt(k-4)=='a'))){
                 rezNotation = rezNotation.substring(0,k-3) + rezNotation.substring(k-2,k-1)
                         + rezNotation.substring(k, rezNotation.length());
             } else if (k>1 && rezNotation.charAt(k)=='g' && rezNotation.charAt(k-2)=='t') {

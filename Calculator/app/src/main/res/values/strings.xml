@@ -26,9 +26,10 @@
     <string name="func_cos">cos</string>
     <string name="func_tg">tg</string>
     <string name="func_ctg">ctg</string>
+    <string name="func_actg">actg</string>
     <string name="func_pi">π</string>
     <string name="func_e">e</string>
-    <string name="func_log">log</string>
+    <string name="func_log">ln</string>
     <string name="func_sqrt">√</string>
     <string name="func_fact">x!</string>
     <string name="func_op">RPN</string>

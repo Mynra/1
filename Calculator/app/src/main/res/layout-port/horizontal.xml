@@ -1,345 +1,294 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/zero"
+        android:textSize="20sp"
+        android:scrollbars="horizontal"
+        android:maxLines="25"
+        android:singleLine="false"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:background="@android:color/darker_gray"
+        android:focusable="false"
+        android:gravity="start" />
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#ff000000"
+        android:textSize="28sp"
+        android:scrollbars="vertical"
+        android:maxLines="25"
+        android:singleLine="false"
+        android:textIsSelectable="false"
+        android:background="@drawable/abc_popup_background_mtrl_mult" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#ff000000"
+        android:textSize="28sp"
+        android:textIsSelectable="false"
+        android:background="@drawable/abc_popup_background_mtrl_mult" />
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
     <Button
         android:id="@+id/button1"
         android:layout_width="102dp"
-        android:layout_height="30dp"
+        android:layout_height="27dp"
         android:layout_marginLeft="3dp"
         android:layout_marginBottom="3dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
         android:text="@string/zero" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="102dp"
-        android:layout_height="30dp"
+        android:layout_height="27dp"
         android:layout_marginLeft="3dp"
         android:layout_marginBottom="3dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/button1"
         android:text="@string/point" />
 
     <Button
         android:id="@+id/button3"
         android:layout_width="102dp"
-        android:layout_height="30dp"
+        android:layout_height="27dp"
         android:layout_marginLeft="3dp"
         android:layout_marginBottom="3dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/button2"
         android:text="@string/entry" />
 
     <Button
         android:id="@+id/button4"
         android:layout_width="102dp"
-        android:layout_height="30dp"
+        android:layout_height="27dp"
         android:layout_marginLeft="3dp"
         android:layout_marginBottom="3dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/button3"
         android:text="@string/subtract" />
-
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <Button
         android:id="@+id/button5"
         android:layout_width="102dp"
-        android:layout_height="30dp"
+        android:layout_height="27dp"
         android:layout_marginLeft="3dp"
         android:layout_marginBottom="3dp"
-        android:layout_above="@+id/button1"
-        android:layout_alignParentLeft="true"
         android:text="@string/one" />
 
     <Button
         android:id="@+id/button6"
         android:layout_width="102dp"
-        android:layout_height="30dp"
-        android:text="@string/two"
-        android:layout_alignTop="@+id/button7"
-        android:layout_toLeftOf="@+id/button3" />
+        android:layout_height="27dp"
+        android:text="@string/two" />
 
     <Button
         android:id="@+id/button7"
         android:layout_width="102dp"
-        android:layout_height="30dp"
+        android:layout_height="27dp"
         android:layout_marginLeft="3dp"
         android:layout_marginBottom="3dp"
-        android:layout_above="@+id/button3"
-        android:layout_toRightOf="@+id/button6"
+        android:soundEffectsEnabled="true"
         android:text="@string/three" />
 
     <Button
         android:id="@+id/button8"
         android:layout_width="102dp"
-        android:layout_height="30dp"
-        android:text="@string/add"
-        android:layout_alignTop="@+id/button25"
-        android:layout_alignLeft="@+id/button4" />
+        android:layout_height="27dp"
+        android:text="@string/add" /></LinearLayout>
 
     <Button
         android:id="@+id/button9"
         android:layout_width="102dp"
-        android:layout_height="30dp"
+        android:layout_height="27dp"
         android:layout_marginLeft="3dp"
         android:layout_marginBottom="3dp"
-        android:layout_above="@+id/button5"
-        android:layout_alignParentLeft="true"
         android:text="@string/four" />
 
     <Button
         android:id="@+id/button10"
         android:layout_width="102dp"
-        android:layout_height="30dp"
-        android:text="@string/five"
-        android:layout_below="@+id/button13"
-        android:layout_alignLeft="@+id/button6" />
+        android:layout_height="27dp"
+        android:text="@string/five" />
 
     <Button
         android:id="@+id/button11"
         android:layout_width="102dp"
-        android:layout_height="30dp"
+        android:layout_height="27dp"
         android:layout_marginLeft="3dp"
         android:layout_marginBottom="3dp"
-        android:layout_above="@id/button7"
-        android:layout_toRightOf="@id/button10"
         android:text="@string/six" />
 
     <Button
         android:id="@+id/button12"
         android:layout_width="102dp"
-        android:layout_height="30dp"
+        android:layout_height="27dp"
         android:layout_marginLeft="3dp"
         android:layout_marginBottom="3dp"
-        android:layout_alignBaseline="@+id/button11"
-        android:layout_alignBottom="@+id/button11"
-        android:layout_toRightOf="@+id/button11"
         android:text="@string/multiply" />
 
     <Button
         android:id="@+id/button13"
         android:layout_width="102dp"
-        android:layout_height="30dp"
+        android:layout_height="27dp"
         android:layout_marginLeft="3dp"
         android:layout_marginBottom="3dp"
-        android:layout_above="@+id/button9"
-        android:layout_alignParentLeft="true"
         android:text="@string/seven" />
 
     <Button
         android:id="@+id/button14"
         android:layout_width="102dp"
-        android:layout_height="30dp"
-        android:text="@string/eight"
-        android:layout_below="@+id/button23"
-        android:layout_alignLeft="@+id/button6" />
+        android:layout_height="27dp"
+        android:text="@string/eight" />
 
     <Button
         android:id="@+id/button15"
         android:layout_width="102dp"
-        android:layout_height="30dp"
+        android:layout_height="27dp"
         android:layout_marginLeft="3dp"
         android:layout_marginBottom="3dp"
-        android:layout_alignBaseline="@+id/button14"
-        android:layout_alignBottom="@+id/button14"
-        android:layout_toRightOf="@+id/button10"
         android:text="@string/nine" />
 
     <Button
         android:id="@+id/button16"
         android:layout_width="102dp"
-        android:layout_height="30dp"
+        android:layout_height="27dp"
         android:layout_marginLeft="3dp"
         android:layout_marginBottom="3dp"
-        android:layout_alignBaseline="@+id/button15"
-        android:layout_alignBottom="@+id/button15"
-        android:layout_toRightOf="@+id/button11"
         android:text="@string/division" />
 
     <Button
         android:id="@+id/button17"
         android:layout_width="102dp"
-        android:layout_height="30dp"
-        android:text="@string/AC"
-        android:layout_below="@+id/textView2"
-        android:layout_alignLeft="@+id/button16"
-        android:layout_alignStart="@+id/button16" />
+        android:layout_height="27dp"
+        android:text="@string/AC" />
 
     <Button
         android:id="@+id/button18"
         android:layout_width="102dp"
-        android:layout_height="30dp"
+        android:layout_height="27dp"
         android:layout_marginLeft="3dp"
         android:layout_marginBottom="3dp"
-        android:text="@string/power"
-        android:layout_above="@+id/button26"
-        android:layout_toRightOf="@+id/button16" />
+        android:text="@string/power" />
 
     <Button
         android:id="@+id/button19"
         android:layout_width="102dp"
-        android:layout_height="30dp"
+        android:layout_height="27dp"
         android:layout_marginLeft="3dp"
         android:layout_marginBottom="3dp"
         android:text="@string/func_sin"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/button27"/>
+        android:longClickable="true"/>
 
     <Button
         android:id="@+id/button20"
         android:layout_width="102dp"
-        android:layout_height="30dp"
+        android:layout_height="27dp"
         android:layout_marginLeft="3dp"
         android:layout_marginBottom="3dp"
         android:text="@string/func_cos"
-        android:layout_above="@+id/button19"
-        android:layout_toRightOf="@+id/button25"/>
+        android:longClickable="true"/>
 
     <Button
         android:id="@+id/button21"
         android:layout_width="102dp"
-        android:layout_height="30dp"
+        android:layout_height="27dp"
         android:layout_marginLeft="3dp"
         android:layout_marginBottom="3dp"
         android:text="@string/func_tg"
-        android:layout_above="@+id/button20"
-        android:layout_toRightOf="@+id/button26" />
+        android:longClickable="true"/>
 
     <Button
         android:id="@+id/button22"
         android:layout_width="102dp"
-        android:layout_height="30dp"
+        android:layout_height="27dp"
         android:layout_marginLeft="3dp"
         android:layout_marginBottom="3dp"
         android:text="@string/func_ctg"
-        android:layout_above="@+id/button21"
-        android:layout_toRightOf="@+id/button18" />
+        android:longClickable="true" />
 
     <Button
         android:id="@+id/button23"
         android:layout_width="50dp"
-        android:layout_height="30dp"
+        android:layout_height="27dp"
         android:layout_marginLeft="3dp"
         android:layout_marginBottom="3dp"
-        android:text="@string/func_pi"
-        android:layout_above="@+id/button13"
-        android:layout_alignParentLeft="true" />
+        android:text="@string/func_pi" />
 
     <Button
         android:id="@+id/button24"
         android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:text="@string/func_e"
-        android:layout_below="@+id/textView2"
-        android:layout_toLeftOf="@+id/button2"
-        android:layout_toStartOf="@+id/button2" />
+        android:layout_height="27dp"
+        android:text="@string/func_e" />
 
     <Button
         android:id="@+id/button25"
         android:layout_width="102dp"
-        android:layout_height="30dp"
+        android:layout_height="27dp"
         android:layout_marginLeft="3dp"
         android:layout_marginBottom="3dp"
-        android:text="@string/func_log"
-        android:layout_above="@+id/button27"
-        android:layout_toRightOf="@+id/button8"  />
+        android:text="@string/func_log" />
 
     <Button
         android:id="@+id/button26"
         android:layout_width="102dp"
-        android:layout_height="30dp"
+        android:layout_height="27dp"
         android:layout_marginLeft="3dp"
         android:layout_marginBottom="3dp"
-        android:text="@string/func_sqrt"
-        android:layout_above="@+id/button25"
-        android:layout_toRightOf="@+id/button12" />
+        android:text="@string/func_sqrt" />
 
     <Button
         android:id="@+id/button27"
         android:layout_width="102dp"
-        android:layout_height="30dp"
+        android:layout_height="27dp"
         android:layout_marginLeft="3dp"
         android:layout_marginBottom="3dp"
-        android:text="@string/func_fact"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/button4" />
+        android:text="@string/func_fact" />
 
     <Button
         android:id="@+id/button28"
         android:layout_width="102dp"
-        android:layout_height="30dp"
-        android:text="@string/func_op"
-        android:layout_below="@+id/textView2"
-        android:layout_alignLeft="@+id/button22" />
+        android:layout_height="27dp"
+        android:text="@string/func_op" />
 
     <Button
         android:id="@+id/button29"
         android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:text="@string/open_bkt"
-        android:layout_below="@+id/textView2"
-        android:layout_alignLeft="@+id/button14"
-        android:layout_alignStart="@+id/button14" />
+        android:layout_height="27dp"
+        android:text="@string/open_bkt" />
 
     <Button
         android:id="@+id/button30"
         android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:text="@string/close_bkt"
-        android:layout_below="@+id/textView2"
-        android:layout_alignRight="@+id/button14"
-        android:layout_alignEnd="@+id/button14" />
+        android:layout_height="27dp"
+        android:text="@string/close_bkt" />
 
     <Button
         android:id="@+id/button31"
         android:layout_width="102dp"
-        android:layout_height="30dp"
-        android:text="@string/back"
-        android:layout_above="@+id/button15"
-        android:layout_alignLeft="@+id/button15"
-        android:layout_alignStart="@+id/button15" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="30dp"
-        android:layout_height="80dp"
-        android:text="@string/zero"
-        android:textSize="32sp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:background="@android:color/darker_gray"
-        android:focusable="false"
-        android:gravity="center_vertical"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/button23"
-        android:layout_alignStart="@+id/button23"
-        android:layout_alignRight="@+id/textView3"
-        android:layout_alignEnd="@+id/textView3" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="30dp"
-        android:layout_height="80dp"
-        android:textColor="#fafafa"
-        android:textSize="32dp"
-        android:layout_above="@+id/button23"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
-        android:layout_toLeftOf="@+id/button31"
-        android:layout_toStartOf="@+id/button31" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="30dp"
-        android:layout_height="80dp"
-        android:textColor="#fafafa"
-        android:textSize="32dp"
-        android:layout_alignTop="@+id/textView2"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_toRightOf="@+id/textView2"
-        android:layout_toEndOf="@+id/textView2" />
-
-</RelativeLayout>
+        android:layout_height="27dp"
+        android:text="@string/back" />
+</LinearLayout>
+</LinearLayout>

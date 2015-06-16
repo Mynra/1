@@ -1,6 +1,11 @@
 package com.vash.calculator;
+
+import android.content.Context;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.app.Activity;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,18 +20,25 @@ import java.util.Stack;
 
 public class Calculator extends Activity {
 
-
+    private SoundPool mSoundPool;
+    int mStreamId;
     Double val_1 = (double) 0;
     String op = null;
     String val_2;
+    boolean sound = false;
+
     ArrayList<String> bltin = new ArrayList<String>() {{
         add("sin");
         add("cos");
         add("tg");
         add("ctg");
         add("log");
+        add("atg");
         add("fact");
         add("sqrt");
+        add("asin");
+        add("acos");
+        add("actg");
     }};
 
     public double fact(double num) {
@@ -106,6 +118,16 @@ public class Calculator extends Activity {
                             }
                         });
                         break;
+                    case "atg":
+                        exprFragmentCutter(i, 3, exprBuilder, new MathFunctor() {
+                            @Override
+                            public Double func(Double value) {
+                                value = new BigDecimal(Math.toDegrees(Math.atan(value)))
+                                        .setScale(6, BigDecimal.ROUND_HALF_UP).doubleValue();
+                                return value;
+                            }
+                        });
+                        break;
                 }
             } else if (bltin.indexOf(fourSymb) != -1) {
                 switch (fourSymb) {
@@ -122,6 +144,36 @@ public class Calculator extends Activity {
                             @Override
                             public Double func(Double value) {
                                 return fact(value);
+                            }
+                        });
+                        break;
+                    case "acos":
+                        exprFragmentCutter(i, 4, exprBuilder, new MathFunctor() {
+                            @Override
+                            public Double func(Double value) {
+                                value = new BigDecimal(Math.toDegrees(Math.acos(value)))
+                                        .setScale(6, BigDecimal.ROUND_HALF_UP).doubleValue();
+                                return value;
+                            }
+                        });
+                        break;
+                    case "asin":
+                        exprFragmentCutter(i, 4, exprBuilder, new MathFunctor() {
+                            @Override
+                            public Double func(Double value) {
+                                value = new BigDecimal(Math.toDegrees(Math.asin(value)))
+                                        .setScale(6,BigDecimal.ROUND_HALF_UP).doubleValue();
+                                return value;
+                            }
+                        });
+                        break;
+                    case "actg":
+                        exprFragmentCutter(i, 4, exprBuilder, new MathFunctor() {
+                            @Override
+                            public Double func(Double value) {
+                                value = new BigDecimal(Math.toDegrees((Math.PI / 2) - Math.atan(value)))
+                                        .setScale(6,BigDecimal.ROUND_HALF_UP).doubleValue();
+                                return value;
                             }
                         });
                         break;
@@ -160,6 +212,7 @@ public class Calculator extends Activity {
         setContentView(R.layout.land);
         final TextView view = (TextView) findViewById(R.id.textView1);
         final TextView view1 = (TextView) findViewById(R.id.textView2);
+        view1.setMovementMethod(new ScrollingMovementMethod());
         final TextView view2 = (TextView) findViewById(R.id.textView3);
         Button b_0 = (Button) findViewById(R.id.button1);
         Button b_1 = (Button) findViewById(R.id.button5);
@@ -193,6 +246,18 @@ public class Calculator extends Activity {
         Button b_close_bkt = (Button) findViewById(R.id.button30);
         Button b_back = (Button) findViewById(R.id.button31);
 
+        mSoundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 100);
+        mSoundPool.load(this, R.raw.s0, 1);
+        mSoundPool.load(this, R.raw.s1, 2);
+        mSoundPool.load(this, R.raw.s2, 3);
+        mSoundPool.load(this, R.raw.s3, 4);
+        mSoundPool.load(this, R.raw.s4, 5);
+        mSoundPool.load(this, R.raw.s5, 6);
+        mSoundPool.load(this, R.raw.s6, 7);
+        mSoundPool.load(this, R.raw.s7, 8);
+        mSoundPool.load(this, R.raw.s8, 9);
+        mSoundPool.load(this, R.raw.s9, 10);
+
 
         b_0.setOnClickListener(new OnClickListener() {
 
@@ -202,13 +267,25 @@ public class Calculator extends Activity {
                 String pre_val = view.getText().toString();
                 String new_val;
 
+                AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                float curVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                float maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+                float leftVolume = curVolume / maxVolume;
+                float rightVolume = curVolume / maxVolume;
+                int priority = 1;
+                int no_loop = 0;
+                float normal_playback_rate = 1f;
+
                 if (pre_val.equals("0")) {
                     new_val = buttn;
                 } else {
                     new_val = pre_val.concat(buttn);
                 }
-
                 view.setText(new_val);
+                if (sound) {
+                    mStreamId = mSoundPool.play(1, leftVolume, rightVolume, priority, no_loop,
+                            normal_playback_rate);
+                }
             }
         });
 
@@ -220,13 +297,25 @@ public class Calculator extends Activity {
                 String pre_val = view.getText().toString();
                 String new_val;
 
+                AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                float curVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                float maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+                float leftVolume = curVolume / maxVolume;
+                float rightVolume = curVolume / maxVolume;
+                int priority = 1;
+                int no_loop = 0;
+                float normal_playback_rate = 1f;
+
                 if (pre_val.equals("0")) {
                     new_val = buttn;
                 } else {
                     new_val = pre_val.concat(buttn);
                 }
-
                 view.setText(new_val);
+                if (sound) {
+                    mStreamId = mSoundPool.play(2, leftVolume, rightVolume, priority, no_loop,
+                            normal_playback_rate);
+                }
             }
         });
 
@@ -238,13 +327,25 @@ public class Calculator extends Activity {
                 String pre_val = view.getText().toString();
                 String new_val;
 
+                AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                float curVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                float maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+                float leftVolume = curVolume / maxVolume;
+                float rightVolume = curVolume / maxVolume;
+                int priority = 1;
+                int no_loop = 0;
+                float normal_playback_rate = 1f;
+
                 if (pre_val.equals("0")) {
                     new_val = buttn;
                 } else {
                     new_val = pre_val.concat(buttn);
                 }
-
                 view.setText(new_val);
+                if (sound) {
+                    mStreamId = mSoundPool.play(3, leftVolume, rightVolume, priority, no_loop,
+                            normal_playback_rate);
+                }
             }
         });
 
@@ -256,13 +357,24 @@ public class Calculator extends Activity {
                 String pre_val = view.getText().toString();
                 String new_val;
 
+                AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                float curVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                float maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+                float leftVolume = curVolume / maxVolume;
+                float rightVolume = curVolume / maxVolume;
+                int priority = 1;
+                int no_loop = 0;
+                float normal_playback_rate = 1f;
+
                 if (pre_val.equals("0")) {
                     new_val = buttn;
                 } else {
                     new_val = pre_val.concat(buttn);
                 }
-
                 view.setText(new_val);
+                if (sound){
+                mStreamId = mSoundPool.play(4, leftVolume, rightVolume, priority, no_loop,
+                        normal_playback_rate);}
             }
         });
 
@@ -274,13 +386,25 @@ public class Calculator extends Activity {
                 String pre_val = view.getText().toString();
                 String new_val;
 
+                AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                float curVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                float maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+                float leftVolume = curVolume / maxVolume;
+                float rightVolume = curVolume / maxVolume;
+                int priority = 1;
+                int no_loop = 0;
+                float normal_playback_rate = 1f;
+
                 if (pre_val.equals("0")) {
                     new_val = buttn;
                 } else {
                     new_val = pre_val.concat(buttn);
                 }
-
                 view.setText(new_val);
+                if (sound) {
+                    mStreamId = mSoundPool.play(5, leftVolume, rightVolume, priority, no_loop,
+                            normal_playback_rate);
+                }
             }
         });
 
@@ -292,13 +416,25 @@ public class Calculator extends Activity {
                 String pre_val = view.getText().toString();
                 String new_val;
 
+                AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                float curVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                float maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+                float leftVolume = curVolume / maxVolume;
+                float rightVolume = curVolume / maxVolume;
+                int priority = 1;
+                int no_loop = 0;
+                float normal_playback_rate = 1f;
+
                 if (pre_val.equals("0")) {
                     new_val = buttn;
                 } else {
                     new_val = pre_val.concat(buttn);
                 }
-
                 view.setText(new_val);
+                if (sound) {
+                    mStreamId = mSoundPool.play(6, leftVolume, rightVolume, priority, no_loop,
+                            normal_playback_rate);
+                }
             }
         });
 
@@ -310,10 +446,23 @@ public class Calculator extends Activity {
                 String pre_val = view.getText().toString();
                 String new_val;
 
+                AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                float curVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                float maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+                float leftVolume = curVolume / maxVolume;
+                float rightVolume = curVolume / maxVolume;
+                int priority = 1;
+                int no_loop = 0;
+                float normal_playback_rate = 1f;
+
                 if (pre_val.equals("0")) {
                     new_val = buttn;
                 } else {
                     new_val = pre_val.concat(buttn);
+                    if (sound) {
+                        mStreamId = mSoundPool.play(7, leftVolume, rightVolume, priority, no_loop,
+                                normal_playback_rate);
+                    }
                 }
 
                 view.setText(new_val);
@@ -328,10 +477,23 @@ public class Calculator extends Activity {
                 String pre_val = view.getText().toString();
                 String new_val;
 
+                AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                float curVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                float maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+                float leftVolume = curVolume / maxVolume;
+                float rightVolume = curVolume / maxVolume;
+                int priority = 1;
+                int no_loop = 0;
+                float normal_playback_rate = 1f;
+
                 if (pre_val.equals("0")) {
                     new_val = buttn;
                 } else {
                     new_val = pre_val.concat(buttn);
+                    if (sound) {
+                        mStreamId = mSoundPool.play(8, leftVolume, rightVolume, priority, no_loop,
+                                normal_playback_rate);
+                    }
                 }
 
                 view.setText(new_val);
@@ -346,10 +508,23 @@ public class Calculator extends Activity {
                 String pre_val = view.getText().toString();
                 String new_val;
 
+                AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                float curVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                float maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+                float leftVolume = curVolume / maxVolume;
+                float rightVolume = curVolume / maxVolume;
+                int priority = 1;
+                int no_loop = 0;
+                float normal_playback_rate = 1f;
+
                 if (pre_val.equals("0")) {
                     new_val = buttn;
                 } else {
                     new_val = pre_val.concat(buttn);
+                    if (sound) {
+                        mStreamId = mSoundPool.play(9, leftVolume, rightVolume, priority, no_loop,
+                                normal_playback_rate);
+                    }
                 }
 
                 view.setText(new_val);
@@ -364,13 +539,25 @@ public class Calculator extends Activity {
                 String pre_val = view.getText().toString();
                 String new_val;
 
+                AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                float curVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                float maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+                float leftVolume = curVolume / maxVolume;
+                float rightVolume = curVolume / maxVolume;
+                int priority = 2;
+                int no_loop = 0;
+                float normal_playback_rate = 1f;
+
                 if (pre_val.equals("0")) {
                     new_val = buttn;
                 } else {
                     new_val = pre_val.concat(buttn);
                 }
-
                 view.setText(new_val);
+                if (sound) {
+                    mStreamId = mSoundPool.play(10, leftVolume, rightVolume, priority, no_loop,
+                            normal_playback_rate);
+                }
             }
         });
 
@@ -385,7 +572,8 @@ public class Calculator extends Activity {
                 if (pre_val.equals("0")) {
                     new_val = buttn;
                 } else {
-                    if (!pre_val.isEmpty() && Character.isDigit(pre_val.charAt(pre_val.length() - 1))) {
+                    if (!pre_val.isEmpty() &&
+                            Character.isDigit(pre_val.charAt(pre_val.length() - 1))) {
                         new_val = pre_val.concat(buttn);
                     } else
                         new_val = pre_val;
@@ -527,6 +715,25 @@ public class Calculator extends Activity {
             }
         });
 
+        b_sin.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                String buttn = "asin(";
+                String pre_val = view.getText().toString();
+                String new_val;
+                if (pre_val.equals("0") || pre_val.isEmpty()) {
+                    new_val = (buttn + "");
+                } else {
+                    if (!Character.isDigit(pre_val.charAt(pre_val.length() - 1))) {
+                        new_val = pre_val.concat(buttn + "");
+                    } else
+                        new_val = pre_val;
+                }
+                view.setText(new_val);
+                return true;
+            }
+        });
+
         b_cos.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -544,6 +751,25 @@ public class Calculator extends Activity {
                         new_val = pre_val;
                 }
                 view.setText(new_val);
+            }
+        });
+
+        b_cos.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                String buttn = "acos(";
+                String pre_val = view.getText().toString();
+                String new_val;
+                if (pre_val.equals("0") || pre_val.isEmpty()) {
+                    new_val = (buttn + "");
+                } else {
+                    if (!Character.isDigit(pre_val.charAt(pre_val.length() - 1))) {
+                        new_val = pre_val.concat(buttn + "");
+                    } else
+                        new_val = pre_val;
+                }
+                view.setText(new_val);
+                return true;
             }
         });
 
@@ -567,6 +793,25 @@ public class Calculator extends Activity {
             }
         });
 
+        b_tg.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                String buttn = "atg(";
+                String pre_val = view.getText().toString();
+                String new_val;
+                if (pre_val.equals("0") || pre_val.isEmpty()) {
+                    new_val = (buttn + "");
+                } else {
+                    if (!Character.isDigit(pre_val.charAt(pre_val.length() - 1))) {
+                        new_val = pre_val.concat(buttn + "");
+                    } else
+                        new_val = pre_val;
+                }
+                view.setText(new_val);
+                return true;
+            }
+        });
+
         b_ctg.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -584,6 +829,25 @@ public class Calculator extends Activity {
                         new_val = pre_val;
                 }
                 view.setText(new_val);
+            }
+        });
+
+        b_ctg.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                String buttn = "actg(";
+                String pre_val = view.getText().toString();
+                String new_val;
+                if (pre_val.equals("0") || pre_val.isEmpty()) {
+                    new_val = (buttn + "");
+                } else {
+                    if (!Character.isDigit(pre_val.charAt(pre_val.length() - 1))) {
+                        new_val = pre_val.concat(buttn + "");
+                    } else
+                        new_val = pre_val;
+                }
+                view.setText(new_val);
+                return true;
             }
         });
 
@@ -706,7 +970,6 @@ public class Calculator extends Activity {
                     try {
                         view.setText("0");
                         view2.setText("=" + val_2);
-
                     } catch (Exception e) {
                         e.printStackTrace();
                         Toast toast = Toast.makeText(getApplicationContext(),
@@ -777,9 +1040,10 @@ public class Calculator extends Activity {
         int id = item.getItemId();
         switch (id) {
             case R.id.menu_settings:
-
+                sound = false;
             return true;
             case R.id.menu_settings_two:
+                sound = true;
             return  true;
             default:
                 return  super.onOptionsItemSelected(item);
